@@ -15,6 +15,7 @@
  */
 
 namespace ElementorTosurAddons\Widgets;
+
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 
@@ -148,11 +149,67 @@ class TosurCovid extends Widget_Base {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 		$name = $settings['form_name'];
+
+		$args = [
+			'status' => 'publish',
+			'category' => ['covid-19']
+		];
+		$products = wc_get_products($args);
+
+		// echo "<pre>";
+		// print_r($products[0]->get_data());
+		// echo "</pre>";
+
+		$zones = \WC_Shipping_Zones::get_zones();
+		$methods = array_column($zones, 'shipping_methods');
+
+		// foreach ($methods[0] as $method) {
+		// 	echo "<pre>";
+		// 	print_r($method->title);
+		// 	print_r($method->instance_id);
+		// 	echo "</pre>";
+		// }
+
 		?>
 		<form name="<?= $name; ?>" method="POST" action="">
-			<label for="<?= $name; ?>_name">Nombre</label>
-			<input id="<?= $name; ?>_name" type="text">
+
+			<div class="input-group-tosur">
+				<input name="<?= $name; ?>_name" type="text" placeholder="Nombre completo">
+			</div>
+
+			<div class="input-group-tosur">
+				<input name="<?= $name; ?>_dni" type="text" placeholder="DNI">
+				<input name="<?= $name; ?>_phone" type="text" placeholder="Teléfono">
+			</div>
+
+			<div class="input-group-tosur">
+				<select name="<?= $name; ?>_type">
+					<option selected disabled>Seleccionar Tipo de Prueba</option>
+					<?php foreach($products as $product) {
+					$data = $product->get_data();
+					?>
+					<option value="<?= $data['slug']; ?>"><?= $data['name']; ?></option>
+					<?php } ?>
+				</select>
+			</div>
+
+			<div class="input-group-tosur">
+				<input name="<?= $name; ?>_quantity" type="number" placeholder="Cantidad">
+				<select name="<?= $name; ?>_district">
+					<option selected disabled>Seleccionar Distrito</option>
+					<?php foreach($methods[0] as $method) { ?>
+					<option value="<?= $method->instance_id; ?>"><?= $method->title; ?></option>
+					<?php } ?>
+				</select>
+			</div>
+			
+			<div class="input-group-tosur">
+				<input name="<?= $name; ?>_date" type="date" placeholder="Fecha">
+				<input name="<?= $name; ?>_hour" type="time" placeholder="Hora">
+			</div>
+
 			<button type="submit">Enviar</button>
+
 		</form>
 		<?php
 	}
