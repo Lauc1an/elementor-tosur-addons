@@ -38,6 +38,7 @@ class TosurCovid extends Widget_Base {
 	public function __construct( $data = array(), $args = null ) {
 		parent::__construct( $data, $args );
 		wp_register_style( 'tosur-covid', plugins_url( '/assets/css/tosur-covid.css', ELEMENTOR_TOSUR_ADDONS ), array(), '1.0.0' );
+		wp_register_script( 'tosur-covid', plugins_url( '/assets/js/tosur-covid.js', ELEMENTOR_TOSUR_ADDONS ) );
 	}
 
 	/**
@@ -101,6 +102,13 @@ class TosurCovid extends Widget_Base {
 	 * Enqueue styles.
 	 */
 	public function get_style_depends() {
+		return array( 'tosur-covid' );
+	}
+
+	/**
+	 * Enqueue scripts.
+	 */
+	public function get_script_depends() {
 		return array( 'tosur-covid' );
 	}
 
@@ -171,31 +179,35 @@ class TosurCovid extends Widget_Base {
 		// }
 
 		?>
-		<form name="<?= $name; ?>" method="POST" action="">
+		<form name="<?= $name; ?>" id="tosur-form-covid" method="POST">
 
 			<div class="input-group-tosur">
-				<input name="<?= $name; ?>_name" type="text" placeholder="Nombre completo">
+				<input name="name" type="text" placeholder="Nombre completo">
 			</div>
 
 			<div class="input-group-tosur">
-				<input name="<?= $name; ?>_dni" type="text" placeholder="DNI">
-				<input name="<?= $name; ?>_phone" type="text" placeholder="Teléfono">
+				<input name="email" type="email" placeholder="Correo electrónico">
 			</div>
 
 			<div class="input-group-tosur">
-				<select name="<?= $name; ?>_type">
+				<input name="dni" type="text" placeholder="DNI">
+				<input name="phone" type="text" placeholder="Teléfono">
+			</div>
+
+			<div class="input-group-tosur">
+				<select name="product_id">
 					<option selected disabled>Seleccionar Tipo de Prueba</option>
 					<?php foreach($products as $product) {
 					$data = $product->get_data();
 					?>
-					<option value="<?= $data['slug']; ?>"><?= $data['name']; ?></option>
+					<option value="<?= $data['id']; ?>"><?= $data['name']; ?></option>
 					<?php } ?>
 				</select>
 			</div>
 
 			<div class="input-group-tosur">
-				<input name="<?= $name; ?>_quantity" type="number" placeholder="Cantidad">
-				<select name="<?= $name; ?>_district">
+				<input name="quantity" type="number" placeholder="Cantidad">
+				<select name="district">
 					<option selected disabled>Seleccionar Distrito</option>
 					<?php foreach($methods[0] as $method) { ?>
 					<option value="<?= $method->instance_id; ?>"><?= $method->title; ?></option>
@@ -204,8 +216,8 @@ class TosurCovid extends Widget_Base {
 			</div>
 			
 			<div class="input-group-tosur">
-				<input name="<?= $name; ?>_date" type="date" placeholder="Fecha">
-				<input name="<?= $name; ?>_hour" type="time" placeholder="Hora">
+				<input name="date" type="date" placeholder="Fecha">
+				<input name="hour" type="time" placeholder="Hora">
 			</div>
 
 			<button type="submit">Enviar</button>
