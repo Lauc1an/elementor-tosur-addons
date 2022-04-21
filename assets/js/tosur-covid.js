@@ -3,6 +3,7 @@ jQuery( function( $ ) {
    
     $('#tosur-form-covid').on('submit', function(e) {
         e.preventDefault();
+        const form = $(this);
         let formData = new FormData(this);
 
         $.ajax({
@@ -24,8 +25,8 @@ jQuery( function( $ ) {
 
                 // Redirect to cart option
                 if ( wc_add_to_cart_params.cart_redirect_after_add === 'yes' ) {
-                    console.log('cart_url', wc_add_to_cart_params.cart_url);
-                    // return;
+                    window.location.href = "checkout/?"+ form.serialize();
+                    return;
                 }
 
                 console.log('added_to_cart > cart_hash', response.cart_hash);

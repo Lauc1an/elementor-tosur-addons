@@ -182,16 +182,16 @@ class TosurCovid extends Widget_Base {
 		<form name="<?= $name; ?>" id="tosur-form-covid" method="POST">
 
 			<div class="input-group-tosur">
-				<input name="name" type="text" placeholder="Nombre completo">
+				<input name="nombre" type="text" placeholder="Nombre completo">
 			</div>
 
 			<div class="input-group-tosur">
-				<input name="email" type="email" placeholder="Correo electrónico">
+				<input name="correo" type="email" placeholder="Correo electrónico">
 			</div>
 
 			<div class="input-group-tosur">
 				<input name="dni" type="text" placeholder="DNI">
-				<input name="phone" type="text" placeholder="Teléfono">
+				<input name="telefono" type="text" placeholder="Teléfono">
 			</div>
 
 			<div class="input-group-tosur">
@@ -207,7 +207,7 @@ class TosurCovid extends Widget_Base {
 
 			<div class="input-group-tosur">
 				<input name="quantity" type="number" placeholder="Cantidad">
-				<select name="district">
+				<select name="distrito">
 					<option selected disabled>Seleccionar Distrito</option>
 					<?php foreach($methods[0] as $method) { ?>
 					<option value="<?= $method->instance_id; ?>"><?= $method->title; ?></option>
@@ -216,8 +216,8 @@ class TosurCovid extends Widget_Base {
 			</div>
 			
 			<div class="input-group-tosur">
-				<input name="date" type="date" placeholder="Fecha">
-				<input name="hour" type="time" placeholder="Hora">
+				<input name="fecha" type="date" placeholder="Fecha">
+				<input name="hora" type="time" placeholder="Hora">
 			</div>
 
 			<button type="submit">Enviar</button>
