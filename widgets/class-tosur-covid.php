@@ -164,19 +164,8 @@ class TosurCovid extends Widget_Base {
 		];
 		$products = wc_get_products($args);
 
-		// echo "<pre>";
-		// print_r($products[0]->get_data());
-		// echo "</pre>";
-
 		$zones = \WC_Shipping_Zones::get_zones();
 		$methods = array_column($zones, 'shipping_methods');
-
-		// foreach ($methods[0] as $method) {
-		// 	echo "<pre>";
-		// 	print_r($method->title);
-		// 	print_r($method->instance_id);
-		// 	echo "</pre>";
-		// }
 
 		?>
 		<form name="<?= $name; ?>" id="tosur-form-covid" method="POST">

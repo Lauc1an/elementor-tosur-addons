@@ -37,6 +37,7 @@ class TosurBrevete extends Widget_Base {
 	public function __construct( $data = array(), $args = null ) {
 		parent::__construct( $data, $args );
 		wp_register_style( 'tosur-brevete', plugins_url( '/assets/css/tosur-brevete.css', ELEMENTOR_TOSUR_ADDONS ), array(), '1.0.0' );
+		wp_register_script( 'tosur-brevete', plugins_url( '/assets/js/tosur-brevete.js', ELEMENTOR_TOSUR_ADDONS ) );
 	}
 
 	/**
@@ -104,6 +105,13 @@ class TosurBrevete extends Widget_Base {
 	}
 
 	/**
+	 * Enqueue scripts.
+	 */
+	public function get_script_depends() {
+		return array( 'tosur-brevete' );
+	}
+
+	/**
 	 * Register the widget controls.
 	 *
 	 * Adds different input fields to allow the user to change and customize the widget settings.
@@ -148,10 +156,68 @@ class TosurBrevete extends Widget_Base {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 		$name = $settings['form_name'];
+
+		$args = [
+			'status' => 'publish',
+			'category' => ['brevete']
+		];
+		$products = wc_get_products($args);
+
+		$zones = \WC_Shipping_Zones::get_zones();
+		$methods = array_column($zones, 'shipping_methods');
+
+		// echo "<pre>";
+		// var_dump($methods[1]);
+		// echo "<pre>";
+
 		?>
-		<form name="<?= $name; ?>" method="POST" action="">
-			<label for="<?= $name; ?>_name">Nombre</label>
-			<input id="<?= $name; ?>_name" type="text">
+		<form name="<?= $name; ?>" id="tosur-form-brevete" method="POST">
+
+			<div class="input-group-tosur">
+				<input name="nombre" type="text" placeholder="Nombre completo">
+			</div>
+
+			<div class="input-group-tosur">
+				<input name="correo" type="email" placeholder="Correo electrónico">
+			</div>
+
+			<div class="input-group-tosur">
+				<input name="dni" type="text" placeholder="DNI">
+				<input name="telefono" type="text" placeholder="Teléfono">
+			</div>
+
+			<div class="input-group-tosur">
+				<select name="product_id">
+					<option selected disabled>Seleccionar Servicio</option>
+					<?php foreach($products as $product) {
+					$data = $product->get_data();
+					?>
+					<option value="<?= $data['id']; ?>"><?= $data['name']; ?></option>
+					<?php } ?>
+				</select>
+			</div>
+			
+			<div class="input-group-tosur">
+				<select name="categoria">
+					<option selected disabled>Seleccionar Categoría</option>
+					
+				</select>
+			</div>
+
+			<div class="input-group-tosur">
+				<select name="distrito">
+					<option selected disabled>Seleccionar Sede</option>
+					<?php foreach($methods[1] as $method) { ?>
+					<option value="<?= $method->instance_id; ?>"><?= $method->title; ?></option>
+					<?php } ?>
+				</select>
+			</div>
+
+			<div class="input-group-tosur">
+				<input name="fecha" type="date" placeholder="Fecha">
+				<input name="hora" type="time" placeholder="Hora">
+			</div>
+
 			<button type="submit">Enviar</button>
 		</form>
 		<?php
