@@ -170,7 +170,7 @@ class TosurBrevete extends Widget_Base {
 		$methods = array_column($zones, 'shipping_methods');
 
 		?>
-		<form name="<?= $name; ?>" id="tosur-form-brevete" method="POST">
+		<form name="<?= $name; ?>" class="tosur-form-brevete" method="POST">
 
 			<div class="input-group-tosur">
 				<input name="nombre" type="text" placeholder="Nombre completo" required>

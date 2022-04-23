@@ -1,7 +1,7 @@
 // Get Submit on Covid Form
 jQuery( function( $ ) {
    
-    $('#tosur-form-covid').on('submit', function(e) {
+    $('.tosur-form-covid').on('submit', function(e) {
         e.preventDefault();
         const form = $(this);
         let formData = new FormData(this);
