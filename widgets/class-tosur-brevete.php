@@ -36,7 +36,7 @@ class TosurBrevete extends Widget_Base {
 	 */
 	public function __construct( $data = array(), $args = null ) {
 		parent::__construct( $data, $args );
-		wp_register_style( 'tosur-brevete', plugins_url( '/assets/css/tosur-brevete.css', ELEMENTOR_TOSUR_ADDONS ), array(), '1.0.0' );
+		wp_register_style( 'tosur-brevete', plugins_url( '/assets/css/tosur-forms.css', ELEMENTOR_TOSUR_ADDONS ), array(), '1.0.0' );
 		wp_register_script( 'tosur-brevete', plugins_url( '/assets/js/tosur-brevete.js', ELEMENTOR_TOSUR_ADDONS ) );
 	}
 
@@ -222,7 +222,7 @@ class TosurBrevete extends Widget_Base {
 				<input name="hora" type="time" placeholder="Hora" required>
 			</div>
 
-			<button type="submit">Enviar</button>
+			<button type="submit" class="btn-tosur">Agendar Cita</button>
 		</form>
 		<?php
 	}

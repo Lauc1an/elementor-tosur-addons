@@ -37,7 +37,7 @@ class TosurCovid extends Widget_Base {
 	 */
 	public function __construct( $data = array(), $args = null ) {
 		parent::__construct( $data, $args );
-		wp_register_style( 'tosur-covid', plugins_url( '/assets/css/tosur-covid.css', ELEMENTOR_TOSUR_ADDONS ), array(), '1.0.0' );
+		wp_register_style( 'tosur-covid', plugins_url( '/assets/css/tosur-forms.css', ELEMENTOR_TOSUR_ADDONS ), array(), '1.0.0' );
 		wp_register_script( 'tosur-covid', plugins_url( '/assets/js/tosur-covid.js', ELEMENTOR_TOSUR_ADDONS ) );
 	}
 
@@ -212,7 +212,7 @@ class TosurCovid extends Widget_Base {
 				<input name="hora" type="time" placeholder="Hora" required>
 			</div>
 
-			<button type="submit">Enviar</button>
+			<button type="submit" class="btn-tosur">Agendar Cita</button>
 
 		</form>
 		<?php

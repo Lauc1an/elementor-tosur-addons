@@ -1,0 +1,32 @@
+.input-group-tosur {
+    margin-bottom: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.input-group-tosur input, .input-group-tosur select {
+    background-color: #ffffff;
+    border-width: 0px 0px 0px 0px;
+    border-radius: 7px 7px 7px 7px;
+    font-family: "Montserrat", Sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #909090;
+    width: 100%;
+    height: 36px;
+    padding: 0 10px;
+}
+
+.btn-tosur {
+    background-color: #073B75;
+    color: #FFFFFF;
+    font-family: "Montserrat", Sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 10px 10px 10px 10px;
+    padding: 12px 30px 12px 30px;
+}
+
+.btn-tosur:hover {
+    background-color: #05B5B5;
+}
