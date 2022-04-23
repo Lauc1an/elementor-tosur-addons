@@ -163,31 +163,30 @@ class TosurBrevete extends Widget_Base {
 		];
 		$products = wc_get_products($args);
 
+		$dumy = $products[0]->get_data();
+		$categories = $dumy['attributes']['categoria']->get_data();
+
 		$zones = \WC_Shipping_Zones::get_zones();
 		$methods = array_column($zones, 'shipping_methods');
-
-		// echo "<pre>";
-		// var_dump($methods[1]);
-		// echo "<pre>";
 
 		?>
 		<form name="<?= $name; ?>" id="tosur-form-brevete" method="POST">
 
 			<div class="input-group-tosur">
-				<input name="nombre" type="text" placeholder="Nombre completo">
+				<input name="nombre" type="text" placeholder="Nombre completo" required>
 			</div>
 
 			<div class="input-group-tosur">
-				<input name="correo" type="email" placeholder="Correo electrónico">
+				<input name="correo" type="email" placeholder="Correo electrónico" required>
 			</div>
 
 			<div class="input-group-tosur">
-				<input name="dni" type="text" placeholder="DNI">
-				<input name="telefono" type="text" placeholder="Teléfono">
+				<input name="dni" type="text" placeholder="DNI" required>
+				<input name="telefono" type="text" placeholder="Teléfono" required>
 			</div>
 
 			<div class="input-group-tosur">
-				<select name="product_id">
+				<select name="product_id" required>
 					<option selected disabled>Seleccionar Servicio</option>
 					<?php foreach($products as $product) {
 					$data = $product->get_data();
@@ -198,24 +197,29 @@ class TosurBrevete extends Widget_Base {
 			</div>
 			
 			<div class="input-group-tosur">
-				<select name="categoria">
+				<select name="categoria" required>
 					<option selected disabled>Seleccionar Categoría</option>
-					
-				</select>
-			</div>
-
-			<div class="input-group-tosur">
-				<select name="distrito">
-					<option selected disabled>Seleccionar Sede</option>
-					<?php foreach($methods[1] as $method) { ?>
-					<option value="<?= $method->instance_id; ?>"><?= $method->title; ?></option>
+					<?php foreach($categories['options'] as $category) { ?>
+					<option value="<?= $category; ?>"><?= $category; ?></option>
 					<?php } ?>
 				</select>
 			</div>
 
 			<div class="input-group-tosur">
-				<input name="fecha" type="date" placeholder="Fecha">
-				<input name="hora" type="time" placeholder="Hora">
+				<select name="distrito" required>
+					<option selected disabled>Seleccionar Sede</option>
+					<?php foreach($methods[0] as $method) { 
+						if ($method->id == "flat_rate") {
+							continue;
+						} ?>
+					<option value="<?= $method->id.$method->instance_id; ?>"><?= $method->title; ?></option>
+					<?php } ?>
+				</select>
+			</div>
+
+			<div class="input-group-tosur">
+				<input name="fecha" type="date" placeholder="Fecha" required>
+				<input name="hora" type="time" placeholder="Hora" required>
 			</div>
 
 			<button type="submit">Enviar</button>

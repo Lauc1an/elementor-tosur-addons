@@ -171,20 +171,20 @@ class TosurCovid extends Widget_Base {
 		<form name="<?= $name; ?>" id="tosur-form-covid" method="POST">
 
 			<div class="input-group-tosur">
-				<input name="nombre" type="text" placeholder="Nombre completo">
+				<input name="nombre" type="text" placeholder="Nombre completo" required>
 			</div>
 
 			<div class="input-group-tosur">
-				<input name="correo" type="email" placeholder="Correo electrónico">
+				<input name="correo" type="email" placeholder="Correo electrónico" required>
 			</div>
 
 			<div class="input-group-tosur">
-				<input name="dni" type="text" placeholder="DNI">
-				<input name="telefono" type="text" placeholder="Teléfono">
+				<input name="dni" type="text" placeholder="DNI" required>
+				<input name="telefono" type="text" placeholder="Teléfono" required>
 			</div>
 
 			<div class="input-group-tosur">
-				<select name="product_id">
+				<select name="product_id" required>
 					<option selected disabled>Seleccionar Tipo de Prueba</option>
 					<?php foreach($products as $product) {
 					$data = $product->get_data();
@@ -195,18 +195,21 @@ class TosurCovid extends Widget_Base {
 			</div>
 
 			<div class="input-group-tosur">
-				<input name="quantity" type="number" placeholder="Cantidad">
-				<select name="distrito">
+				<input name="quantity" type="number" placeholder="Cantidad" required>
+				<select name="distrito" required>
 					<option selected disabled>Seleccionar Distrito</option>
-					<?php foreach($methods[0] as $method) { ?>
-					<option value="<?= $method->instance_id; ?>"><?= $method->title; ?></option>
+					<?php foreach($methods[0] as $method) { 
+						if ($method->instance_id == 20) {
+							continue;
+						} ?>
+					<option value="<?= $method->id.$method->instance_id; ?>"><?= $method->title; ?></option>
 					<?php } ?>
 				</select>
 			</div>
 			
 			<div class="input-group-tosur">
-				<input name="fecha" type="date" placeholder="Fecha">
-				<input name="hora" type="time" placeholder="Hora">
+				<input name="fecha" type="date" placeholder="Fecha" required>
+				<input name="hora" type="time" placeholder="Hora" required>
 			</div>
 
 			<button type="submit">Enviar</button>
