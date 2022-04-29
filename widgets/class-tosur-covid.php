@@ -97,7 +97,7 @@ class TosurCovid extends Widget_Base {
 	public function get_categories() {
 		return array( 'general' );
 	}
-	
+
 	/**
 	 * Enqueue styles.
 	 */
@@ -144,7 +144,7 @@ class TosurCovid extends Widget_Base {
 		$this->end_controls_section();
 
 	}
-    
+
 	/**
 	 * Render the widget output on the frontend.
 	 *
@@ -169,20 +169,16 @@ class TosurCovid extends Widget_Base {
 
 		?>
 		<form name="<?= $name; ?>" class="tosur-form-covid" method="POST">
-
 			<div class="input-group-tosur">
 				<input name="nombre" type="text" placeholder="Nombre completo" required>
 			</div>
-
 			<div class="input-group-tosur">
 				<input name="correo" type="email" placeholder="Correo electrónico" required>
 			</div>
-
 			<div class="input-group-tosur">
 				<input name="dni" type="text" placeholder="DNI" required>
 				<input name="telefono" type="text" placeholder="Teléfono" required>
 			</div>
-
 			<div class="input-group-tosur">
 				<select name="product_id" required>
 					<option selected disabled>Seleccionar Tipo de Prueba</option>
@@ -193,12 +189,11 @@ class TosurCovid extends Widget_Base {
 					<?php } ?>
 				</select>
 			</div>
-
 			<div class="input-group-tosur">
 				<input name="quantity" type="number" placeholder="Cantidad" required>
 				<select name="distrito" required>
 					<option selected disabled>Seleccionar Distrito</option>
-					<?php foreach($methods[0] as $method) { 
+					<?php foreach($methods[0] as $method) {
 						if ($method->instance_id == 20) {
 							continue;
 						} ?>
@@ -206,14 +201,14 @@ class TosurCovid extends Widget_Base {
 					<?php } ?>
 				</select>
 			</div>
-			
+			<div class="input-group-tosur">
+				<input name="direccion" type="text" placeholder="Dirección">
+			</div>
 			<div class="input-group-tosur">
 				<input name="fecha" type="date" placeholder="Fecha" required>
 				<input name="hora" type="time" placeholder="Hora" required>
 			</div>
-
 			<button type="submit" class="btn-tosur">Agendar Cita</button>
-
 		</form>
 		<?php
 	}
@@ -236,5 +231,5 @@ class TosurCovid extends Widget_Base {
 		</form>
 		<?php
 	}
-	
+
 }
