@@ -159,7 +159,9 @@ class TosurBrevete extends Widget_Base {
 
 		$args = [
 			'status' => 'publish',
-			'category' => ['brevete']
+			'category' => ['brevete'],
+			'orderby' => 'menu_order',
+			'order' => 'ASC',
 		];
 		$products = wc_get_products($args);
 
@@ -171,20 +173,16 @@ class TosurBrevete extends Widget_Base {
 
 		?>
 		<form name="<?= $name; ?>" class="tosur-form-brevete" method="POST">
-
 			<div class="input-group-tosur">
 				<input name="nombre" type="text" placeholder="Nombre completo" required>
 			</div>
-
 			<div class="input-group-tosur">
 				<input name="correo" type="email" placeholder="Correo electrónico" required>
 			</div>
-
 			<div class="input-group-tosur">
 				<input name="dni" type="text" placeholder="DNI" required>
 				<input name="telefono" type="text" placeholder="Teléfono" required>
 			</div>
-
 			<div class="input-group-tosur">
 				<select name="product_id" required>
 					<option selected disabled>Seleccionar Servicio</option>
@@ -195,7 +193,6 @@ class TosurBrevete extends Widget_Base {
 					<?php } ?>
 				</select>
 			</div>
-			
 			<div class="input-group-tosur">
 				<select name="categoria" required>
 					<option selected disabled>Seleccionar Categoría</option>
@@ -204,7 +201,6 @@ class TosurBrevete extends Widget_Base {
 					<?php } ?>
 				</select>
 			</div>
-
 			<div class="input-group-tosur">
 				<select name="distrito" required>
 					<option selected disabled>Seleccionar Sede</option>
@@ -216,12 +212,10 @@ class TosurBrevete extends Widget_Base {
 					<?php } ?>
 				</select>
 			</div>
-
 			<div class="input-group-tosur">
 				<input name="fecha" type="date" placeholder="Fecha" required>
 				<input name="hora" type="time" placeholder="Hora" required>
 			</div>
-
 			<button type="submit" class="btn-tosur">Agendar Cita</button>
 		</form>
 		<?php
