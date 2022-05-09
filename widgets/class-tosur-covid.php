@@ -195,14 +195,7 @@ class TosurCovid extends Widget_Base {
 				<input name="quantity" type="number" placeholder="Cantidad" required>
 				<select name="distrito" required>
 					<option selected disabled>Seleccionar Distrito</option>
-<<<<<<< HEAD
 					<?php foreach($methods[0] as $method) { ?>
-=======
-					<?php foreach($methods[0] as $method) {
-						if ($method->instance_id == 20) {
-							continue;
-						} ?>
->>>>>>> 9147ad65f058579f1e283a668559c6684e5373a1
 					<option value="<?= $method->id.$method->instance_id; ?>"><?= $method->title; ?></option>
 					<?php } ?>
 				</select>
