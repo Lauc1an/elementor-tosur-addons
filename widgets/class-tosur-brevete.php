@@ -96,7 +96,7 @@ class TosurBrevete extends Widget_Base {
 	public function get_categories() {
 		return array( 'general' );
 	}
-	
+
 	/**
 	 * Enqueue styles.
 	 */
@@ -143,7 +143,7 @@ class TosurBrevete extends Widget_Base {
 		$this->end_controls_section();
 
 	}
-    
+
 	/**
 	 * Render the widget output on the frontend.
 	 *
@@ -204,7 +204,7 @@ class TosurBrevete extends Widget_Base {
 			<div class="input-group-tosur">
 				<select name="distrito" required>
 					<option selected disabled>Seleccionar Sede</option>
-					<?php foreach($methods[0] as $method) { 
+					<?php foreach($methods[0] as $method) {
 						if ($method->id == "flat_rate") {
 							continue;
 						} ?>
@@ -230,5 +230,5 @@ class TosurBrevete extends Widget_Base {
 		</form>
 		<?php
 	}
-	
+
 }

@@ -97,7 +97,7 @@ class TosurCovid extends Widget_Base {
 	public function get_categories() {
 		return array( 'general' );
 	}
-	
+
 	/**
 	 * Enqueue styles.
 	 */
@@ -144,7 +144,7 @@ class TosurCovid extends Widget_Base {
 		$this->end_controls_section();
 
 	}
-    
+
 	/**
 	 * Render the widget output on the frontend.
 	 *
@@ -195,7 +195,14 @@ class TosurCovid extends Widget_Base {
 				<input name="quantity" type="number" placeholder="Cantidad" required>
 				<select name="distrito" required>
 					<option selected disabled>Seleccionar Distrito</option>
+<<<<<<< HEAD
 					<?php foreach($methods[0] as $method) { ?>
+=======
+					<?php foreach($methods[0] as $method) {
+						if ($method->instance_id == 20) {
+							continue;
+						} ?>
+>>>>>>> 9147ad65f058579f1e283a668559c6684e5373a1
 					<option value="<?= $method->id.$method->instance_id; ?>"><?= $method->title; ?></option>
 					<?php } ?>
 				</select>
@@ -230,5 +237,5 @@ class TosurCovid extends Widget_Base {
 		</form>
 		<?php
 	}
-	
+
 }
