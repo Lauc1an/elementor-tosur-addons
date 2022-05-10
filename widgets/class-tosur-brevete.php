@@ -165,12 +165,14 @@ class TosurBrevete extends Widget_Base {
 		];
 		$products = wc_get_products($args);
 
-		$dumy = $products[0]->get_data();
-		$categories = $dumy['attributes']['categoria']->get_data();
-
 		$zones = \WC_Shipping_Zones::get_zones();
 		$methods = array_column($zones, 'shipping_methods');
 
+		$attributes = $products[0]->get_attributes();
+		$categories = $attributes['pa_categoria']->get_terms();
+		$dates = $attributes['pa_fecha']->get_terms();
+		$hours = $attributes['pa_hora']->get_terms();
+		
 		?>
 		<form name="<?= $name; ?>" class="tosur-form-brevete" method="POST">
 			<div class="input-group-tosur">
@@ -196,8 +198,8 @@ class TosurBrevete extends Widget_Base {
 			<div class="input-group-tosur">
 				<select name="categoria" required>
 					<option selected disabled>Seleccionar Categoría</option>
-					<?php foreach($categories['options'] as $category) { ?>
-					<option value="<?= $category; ?>"><?= $category; ?></option>
+					<?php foreach($categories as $category) { ?>
+					<option value="<?= $category->name; ?>"><?= $category->name; ?></option>
 					<?php } ?>
 				</select>
 			</div>
@@ -213,8 +215,18 @@ class TosurBrevete extends Widget_Base {
 				</select>
 			</div>
 			<div class="input-group-tosur">
-				<input name="fecha" type="date" placeholder="Fecha" required>
-				<input name="hora" type="time" placeholder="Hora" required>
+				<select name="fecha" required>
+					<option selected disabled>Seleccionar fecha</option>
+					<?php foreach($dates as $date) { ?>
+					<option value="<?= $date->name; ?>"><?= $date->name; ?></option>
+					<?php } ?>
+				</select>
+				<select name="hora" required>
+					<option selected disabled>Seleccionar hora</option>
+					<?php foreach($hours as $hour) { ?>
+					<option value="<?= $hour->name; ?>"><?= $hour->name; ?></option>
+					<?php } ?>
+				</select>
 			</div>
 			<button type="submit" class="btn-tosur">Agendar Cita</button>
 		</form>
