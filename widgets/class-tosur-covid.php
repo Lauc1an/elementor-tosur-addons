@@ -170,8 +170,6 @@ class TosurCovid extends Widget_Base {
 		$methods = array_column($zones, 'shipping_methods');
 
 		$attributes = $products[0]->get_attributes();
-		$dates = $attributes['pa_fecha']->get_terms();
-		$hours = $attributes['pa_hora']->get_terms();
 
 		?>
 		<form name="<?= $name; ?>" class="tosur-form-covid" method="POST">
@@ -208,18 +206,8 @@ class TosurCovid extends Widget_Base {
 				<input name="direccion" type="text" placeholder="Dirección">
 			</div>
 			<div class="input-group-tosur">
-				<select name="fecha" required>
-					<option selected disabled>Seleccionar fecha</option>
-					<?php foreach($dates as $date) { ?>
-					<option value="<?= $date->name; ?>"><?= $date->name; ?></option>
-					<?php } ?>
-				</select>
-				<select name="hora" required>
-					<option selected disabled>Seleccionar hora</option>
-					<?php foreach($hours as $hour) { ?>
-					<option value="<?= $hour->name; ?>"><?= $hour->name; ?></option>
-					<?php } ?>
-				</select>
+				<input name="fecha" type="date" placeholder="Fecha" required>
+				<input name="hora" type="time" placeholder="Hora" required>
 			</div>
 			<button type="submit" class="btn-tosur">Agendar Cita</button>
 		</form>
